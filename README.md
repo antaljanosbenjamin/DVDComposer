@@ -1,1 +1,1 @@
-dvdcomposer
+Homework for Software Architectures course
