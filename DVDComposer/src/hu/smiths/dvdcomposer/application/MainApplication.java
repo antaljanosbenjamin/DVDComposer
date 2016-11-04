@@ -11,7 +11,7 @@ public class MainApplication extends Application {
 
 	@Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("layout_main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/layout_main.fxml"));
         primaryStage.setTitle("RedisVoteFX");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();

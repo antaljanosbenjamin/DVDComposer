@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
-<VBox fx:controller="hu.smiths.dvdcomposer.application.Controller"
+<VBox fx:controller="hu.smiths.dvdcomposer.view.MainViewController"
       xmlns:fx="http://javafx.com/fxml" spacing="10">
 
     <children>
