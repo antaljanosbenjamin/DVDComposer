@@ -1,0 +1,12 @@
+.root{
+    -fx-font-family: "Courier New";
+    -fx-base: rgb(200, 182, 168);
+    -fx-background: rgb(86,86,86);
+}
+
+.header{
+	-fx-text-align: center;
+	-fx-font-weight: bold;
+    -fx-base: rgb(200, 182, 168);
+	-fx-font-size: 24px;
+}

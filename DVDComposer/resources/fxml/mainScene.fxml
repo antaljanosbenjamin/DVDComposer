@@ -1,0 +1,45 @@
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+<?import hu.smiths.dvdcomposer.view.extensions.NumberTextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox fx:controller="hu.smiths.dvdcomposer.view.MainViewController"
+      xmlns:fx="http://javafx.com/fxml" spacing="10">
+
+    <children>
+    <HBox alignment="center">
+        <Label text="DVD Composer application"  styleClass="header"/>
+    </HBox>  
+
+	<GridPane alignment="center" hgap="10" vgap="10">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="130.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="70.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="130.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="70.0" />
+    </columnConstraints>
+	<padding>
+		<Insets top="25" right="25" bottom="25" left="25"/>
+	</padding>
+	
+	<Label text="CD (700 MB):" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <NumberTextField fx:id="cdNumberField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	<Label text="DVD (4.7 GB):" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+    <NumberTextField fx:id="dvdNumberField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        
+	</GridPane>
+	
+    <HBox alignment="center">
+        <Button fx:id="someButton" text="Do it!" onAction="#someFunction"/>
+    </HBox>
+     
+    </children>
+
+</VBox>
