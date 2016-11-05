@@ -18,7 +18,7 @@
         <Label text="DVD Composer application"  styleClass="header"/>
     </HBox>  
 
-	<GridPane alignment="center" hgap="10" vgap="10">
+	<GridPane fx:id="gridPane" alignment="center" hgap="10" vgap="10">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="130.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="70.0" />
@@ -30,10 +30,15 @@
 	</padding>
 	
 	<Label text="CD (700 MB):" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <NumberTextField fx:id="cdNumberField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-	<Label text="DVD (4.7 GB):" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-    <NumberTextField fx:id="dvdNumberField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-        
+    <NumberTextField fx:id="cdQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	<Label text="DVD (4.7 GB):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <NumberTextField fx:id="dvdQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	<Label text="Blue ray (25 GB):" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <NumberTextField fx:id="brQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField fx:id="otherContainerNameField" GridPane.columnIndex="0" GridPane.rowIndex="3" promptText="Container name"/>
+    <NumberTextField fx:id="otherContainerSizeField" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Size(MB)"/>
+    <NumberTextField fx:id="otherContainerQuantityField" GridPane.columnIndex="2" GridPane.rowIndex="3" promptText="Quantity"/>
+    
 	</GridPane>
 	
     <HBox alignment="center">

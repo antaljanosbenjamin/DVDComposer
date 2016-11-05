@@ -1,23 +1,18 @@
 package hu.smiths.dvdcomposer.application;
 
 import hu.smiths.dvdcomposer.utils.JarLoader;
+import hu.smiths.dvdcomposer.view.SceneManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApplication extends Application {
 
 	@Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainScene.fxml"));
-        Scene scene = new Scene(root, 640, 480);
-        scene.getStylesheets().add("/css/composer.css");
-        
+		SceneManager.getInstance().setPrimaryStage(primaryStage);
         primaryStage.setTitle("DVD Composer");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        SceneManager.getInstance().changeScene("/fxml/mainScene.fxml");
+        
     }
 	
 	public static void main(String[] args) {

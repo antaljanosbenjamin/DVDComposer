@@ -1,0 +1,26 @@
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+<?import hu.smiths.dvdcomposer.view.extensions.NumberTextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox fx:controller="hu.smiths.dvdcomposer.view.FileChooserViewController"
+      xmlns:fx="http://javafx.com/fxml" spacing="10">
+
+    <children>
+    <HBox alignment="center">
+        <Label text="DVD Composer application"  styleClass="header"/>
+    </HBox>  
+    <VBox alignment="center">
+    	<Button text="Add directory to the selection" onAction="#openFileChooser"/>
+    </VBox>
+    
+    </children>
+
+</VBox>
