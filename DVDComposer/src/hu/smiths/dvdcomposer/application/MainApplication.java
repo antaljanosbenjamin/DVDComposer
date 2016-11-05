@@ -1,6 +1,5 @@
 package hu.smiths.dvdcomposer.application;
 
-import hu.smiths.dvdcomposer.utils.JarLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +20,6 @@ public class MainApplication extends Application {
     }
 	
 	public static void main(String[] args) {
-		JarLoader loader = new JarLoader();
-//		loader.load();		
-
 		System.out.println("Succes!");
 		launch(args);
 	}
