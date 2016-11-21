@@ -6,12 +6,14 @@ public class DiskType implements Serializable {
 
 	private static final long serialVersionUID = 6525241729717592702L;
 	
+	private static Integer globalId = 0;
 
 	private String name;
 	
 	private Integer size;
 	
 	private Integer count;
+	private final Integer id;
 	
 	private Boolean infinity;
 	
@@ -20,6 +22,10 @@ public class DiskType implements Serializable {
 		this.size = size;
 		this.count = count;
 		this.infinity = infinity;
+		synchronized (globalId) {
+			id = globalId;
+			globalId++;
+		}
 	}
 	
 	public String getName() {
@@ -52,5 +58,14 @@ public class DiskType implements Serializable {
 
 	public void setInfinity(Boolean infinity) {
 		this.infinity = infinity;
+	}
+	
+	@Override
+	public boolean equals(Object otherObject){
+		if (otherObject.getClass().equals(getClass())){
+			DiskType otherType = (DiskType) otherObject;
+			return otherType.id.equals(this.id);
+		} else
+			return false;
 	}
 }
