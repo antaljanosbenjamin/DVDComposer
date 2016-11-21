@@ -3,8 +3,9 @@ package hu.smiths.dvdcomposer.model.disktypes;
 import java.io.Serializable;
 
 public class DiskType implements Serializable {
+
+	private static final long serialVersionUID = 6525241729717592702L;
 	
-	private static final long serialVersionUID = 1L;
 
 	private String name;
 	
