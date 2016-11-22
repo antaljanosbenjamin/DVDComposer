@@ -37,6 +37,16 @@ public class DiskRack implements Serializable {
 	public Integer getSize() {
 		return size;
 	}
+	
+	public void setCount(Integer newCount){
+		this.count = newCount;
+		this.infinity = Boolean.FALSE;
+	}
+	
+	public void setCountToInfinite(){
+		this.infinity = Boolean.TRUE;
+		count = 0;
+	}
 
 	public Boolean countIsAtLeast(Integer guessedCount) {
 		return infinity || count >= guessedCount;
@@ -50,14 +60,13 @@ public class DiskRack implements Serializable {
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
 			DiskRack otherType = (DiskRack) otherObject;
-			return otherType.name.equals(this.name) && otherType.size.equals(this.size)
-					&& otherType.infinity.equals(this.infinity) && otherType.count.equals(this.count);
+			return otherType.name.equals(this.name) && otherType.size.equals(this.size);
 		} else
 			return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return (41 * (41 * (41 * (41 + count.hashCode()) + size.hashCode()) + infinity.hashCode()) + name.hashCode());
+		return (41 * (41 * (41 * (41 + size.hashCode()) + name.hashCode()) + name.hashCode()) + size.hashCode());
 	}
 }
