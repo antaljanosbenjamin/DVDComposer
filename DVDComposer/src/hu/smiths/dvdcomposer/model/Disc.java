@@ -2,22 +2,22 @@ package hu.smiths.dvdcomposer.model;
 
 import java.io.Serializable;
 
-public class Disk implements Serializable {
+public class Disc implements Serializable {
 
 	private static final long serialVersionUID = 2967319287369484755L;
 
-	private DiskType type;
+	private DiscGroup group;
 
-	public Disk(DiskType type) {
-		this.type = type;
+	public Disc(DiscGroup rack) {
+		this.group = rack;
 	}
 
-	public DiskType getType() {
-		return type;
+	public DiscGroup getGroup() {
+		return group;
 	}
 
-	public void setType(DiskType type) {
-		this.type = type;
+	public void setGroup(DiscGroup rack) {
+		this.group = rack;
 	}
 
 	@Override

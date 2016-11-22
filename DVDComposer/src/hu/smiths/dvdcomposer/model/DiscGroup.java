@@ -3,7 +3,7 @@ package hu.smiths.dvdcomposer.model;
 import java.io.Serializable;
 import java.util.TreeSet;
 
-public class DiskRack implements Serializable {
+public class DiscGroup implements Serializable {
 
 	private static final long serialVersionUID = 6525241729717592702L;
 
@@ -15,15 +15,15 @@ public class DiskRack implements Serializable {
 
 	private Boolean infinity;
 
-	public static DiskRack createFinite(String name, Integer size, Integer count) {
-		return new DiskRack(name, size, count, Boolean.FALSE);
+	public static DiscGroup createFinite(String name, Integer size, Integer count) {
+		return new DiscGroup(name, size, count, Boolean.FALSE);
 	}
 
-	public static DiskRack createInfinite(String name, Integer size) {
-		return new DiskRack(name, size, Integer.valueOf(0), Boolean.TRUE);
+	public static DiscGroup createInfinite(String name, Integer size) {
+		return new DiscGroup(name, size, Integer.valueOf(0), Boolean.TRUE);
 	}
 
-	protected DiskRack(String name, Integer size, Integer count, Boolean infinity) {
+	protected DiscGroup(String name, Integer size, Integer count, Boolean infinity) {
 		this.name = name;
 		this.size = size;
 		this.count = count;
@@ -59,7 +59,7 @@ public class DiskRack implements Serializable {
 	@Override
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
-			DiskRack otherType = (DiskRack) otherObject;
+			DiscGroup otherType = (DiscGroup) otherObject;
 			return otherType.name.equals(this.name) && otherType.size.equals(this.size);
 		} else
 			return false;
