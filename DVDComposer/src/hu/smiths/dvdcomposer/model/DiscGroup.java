@@ -1,7 +1,6 @@
 package hu.smiths.dvdcomposer.model;
 
 import java.io.Serializable;
-import java.util.TreeSet;
 
 public class DiscGroup implements Serializable {
 
@@ -34,7 +33,7 @@ public class DiscGroup implements Serializable {
 		return name;
 	}
 
-	public Integer getSize() {
+	public Integer getSizeInBytes() {
 		return size;
 	}
 	
@@ -48,11 +47,11 @@ public class DiscGroup implements Serializable {
 		count = 0;
 	}
 
-	public Boolean countIsAtLeast(Integer guessedCount) {
+	public Boolean haveAtLeast(Integer guessedCount) {
 		return infinity || count >= guessedCount;
 	}
 
-	public Boolean countIsGreaterThan(Integer guessedCount) {
+	public Boolean haveMoreThan(Integer guessedCount) {
 		return infinity || count > guessedCount;
 	}
 
