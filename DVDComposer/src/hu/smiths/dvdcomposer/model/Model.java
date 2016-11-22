@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import hu.smiths.dvdcomposer.model.algorithm.Algorithm;
-import hu.smiths.dvdcomposer.model.exceptions.InvalidAssignmentResultException;
+import hu.smiths.dvdcomposer.model.exceptions.InvalidResultException;
 
 public interface Model extends Serializable {
 
@@ -25,7 +25,7 @@ public interface Model extends Serializable {
 	
 	public boolean removeFolder(File folder);
 
-	public Assignment generateAssignment() throws InvalidAssignmentResultException;
+	public Result generateResult() throws InvalidResultException;
 	
 	public void setAlgorithm(Algorithm algorithm);
 

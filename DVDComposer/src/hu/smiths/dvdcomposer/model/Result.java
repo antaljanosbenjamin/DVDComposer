@@ -8,28 +8,28 @@ import java.util.Set;
 import hu.smiths.dvdcomposer.model.exceptions.NotEnoughSpaceOnDiscException;
 import hu.smiths.dvdcomposer.model.exceptions.TooManyDiscsInOneGroupException;
 
-public class Assignment {
+public class Result {
 
 	private Set<Disc> discs;
 
-	public static Assignment create(Set<Disc> discs)
+	public static Result create(Set<Disc> discs)
 			throws NotEnoughSpaceOnDiscException, TooManyDiscsInOneGroupException {
-		checkDiscSet(discs);
-		return new Assignment(discs);
+		throwExceptionIfDiscSetIsInvalid(discs);
+		return new Result(discs);
 	}
 
-	private Assignment(Set<Disc> discs) {
+	private Result(Set<Disc> discs) {
 
 		this.discs = new HashSet<Disc>(discs);
 	}
 
-	private static void checkDiscSet(Set<Disc> discs)
+	private static void throwExceptionIfDiscSetIsInvalid(Set<Disc> discs)
 			throws NotEnoughSpaceOnDiscException, TooManyDiscsInOneGroupException {
-		checkDiscsSize(discs);
-		checkDiscCountInGroups(discs);
+		throwExceptionIfThereAreTooMuchUsedSpaceOnAnyDisc(discs);
+		throwExceptionIfThereAreTooManyDiscsFromAnyGroup(discs);
 	}
 
-	private static void checkDiscsSize(Set<Disc> discs) throws NotEnoughSpaceOnDiscException {
+	private static void throwExceptionIfThereAreTooMuchUsedSpaceOnAnyDisc(Set<Disc> discs) throws NotEnoughSpaceOnDiscException {
 		for (Disc disc : discs) {
 			if (!disc.spaceIsEnough())
 				throw new NotEnoughSpaceOnDiscException(
@@ -50,10 +50,9 @@ public class Assignment {
 	}
 	
 
-	private static void checkDiscCountInGroups(Set<Disc> discs) throws TooManyDiscsInOneGroupException {
+	private static void throwExceptionIfThereAreTooManyDiscsFromAnyGroup(Set<Disc> discs) throws TooManyDiscsInOneGroupException {
 
 		Map<DiscGroup, Integer> countsByGroup = getCountsByGroup(discs);
-
 		for (Map.Entry<DiscGroup, Integer> entry : countsByGroup.entrySet()) {
 			DiscGroup group = entry.getKey();
 			Integer countInGroup = entry.getValue();
@@ -64,7 +63,8 @@ public class Assignment {
 	}
 
 	private static void incrementsDiscCountInGroup(Map<DiscGroup, Integer> values, DiscGroup group) {
-		values.put(group, values.get(group) + 1);
+		Integer oldValue = values.get(group);
+		values.put(group, oldValue == null ? 1 : oldValue + 1);
 	}
 
 	public Set<Disc> getDiscs() {

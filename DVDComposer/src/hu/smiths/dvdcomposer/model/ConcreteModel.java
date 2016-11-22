@@ -9,7 +9,7 @@ import java.util.Set;
 import hu.smiths.dvdcomposer.model.algorithm.Algorithm;
 import hu.smiths.dvdcomposer.model.algorithm.Input;
 import hu.smiths.dvdcomposer.model.exceptions.CannotFindValidAssignmentException;
-import hu.smiths.dvdcomposer.model.exceptions.InvalidAssignmentResultException;
+import hu.smiths.dvdcomposer.model.exceptions.InvalidResultException;
 import hu.smiths.dvdcomposer.model.exceptions.NotEnoughSpaceOnDiscException;
 import hu.smiths.dvdcomposer.model.exceptions.TooManyDiscsInOneGroupException;
 
@@ -80,11 +80,11 @@ public class ConcreteModel implements Model {
 	}
 
 	@Override
-	public Assignment generateAssignment() throws InvalidAssignmentResultException {
+	public Result generateResult() throws InvalidResultException {
 		try {
-			return Assignment.create(algorithm.generate(new Input(discGroups, folders)));
+			return Result.create(algorithm.generate(new Input(discGroups, folders)));
 		} catch (NotEnoughSpaceOnDiscException | TooManyDiscsInOneGroupException | CannotFindValidAssignmentException e) {
-			throw new InvalidAssignmentResultException(e);
+			throw new InvalidResultException(e);
 		}
 	}
 
