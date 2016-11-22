@@ -1,4 +1,4 @@
-package hu.smiths.dvdcomposer.model.disktypes;
+package hu.smiths.dvdcomposer.model;
 
 import java.io.Serializable;
 import java.util.TreeSet;
@@ -50,8 +50,14 @@ public class DiskType implements Serializable {
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
 			DiskType otherType = (DiskType) otherObject;
-			return otherType.name.equals(this.name) && otherType.size.equals(this.size);
+			return otherType.name.equals(this.name) && otherType.size.equals(this.size)
+					&& otherType.infinity.equals(this.infinity) && otherType.count.equals(this.count);
 		} else
 			return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return (41 * (41 * (41 * (41 + count.hashCode()) + size.hashCode()) + infinity.hashCode()) + name.hashCode());
 	}
 }

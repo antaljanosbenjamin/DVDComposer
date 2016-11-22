@@ -5,16 +5,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import hu.smiths.dvdcomposer.model.algorithm.Algorithm;
-import hu.smiths.dvdcomposer.model.disktypes.DiskType;
 
 public interface IModel extends Serializable {
-	
+
 	public List<DiskType> getDiskTypes();
-	
+
 	public List<File> getFolderEntries();
-	
+
 	public GeneratedResult getResult();
-	
+
 	public List<Algorithm> getAlgorithms();
-	
+
 }
