@@ -3,7 +3,7 @@ package hu.smiths.dvdcomposer.model;
 import java.io.Serializable;
 import java.util.TreeSet;
 
-public class DiskType implements Serializable {
+public class DiskRack implements Serializable {
 
 	private static final long serialVersionUID = 6525241729717592702L;
 
@@ -15,15 +15,15 @@ public class DiskType implements Serializable {
 
 	private Boolean infinity;
 
-	public static DiskType createFinite(String name, Integer size, Integer count) {
-		return new DiskType(name, size, count, Boolean.FALSE);
+	public static DiskRack createFinite(String name, Integer size, Integer count) {
+		return new DiskRack(name, size, count, Boolean.FALSE);
 	}
 
-	public static DiskType createInfinite(String name, Integer size) {
-		return new DiskType(name, size, Integer.valueOf(0), Boolean.TRUE);
+	public static DiskRack createInfinite(String name, Integer size) {
+		return new DiskRack(name, size, Integer.valueOf(0), Boolean.TRUE);
 	}
 
-	protected DiskType(String name, Integer size, Integer count, Boolean infinity) {
+	protected DiskRack(String name, Integer size, Integer count, Boolean infinity) {
 		this.name = name;
 		this.size = size;
 		this.count = count;
@@ -42,14 +42,14 @@ public class DiskType implements Serializable {
 		return infinity || count >= guessedCount;
 	}
 
-	public Boolean countIsGreater(Integer guessedCount) {
+	public Boolean countIsGreaterThan(Integer guessedCount) {
 		return infinity || count > guessedCount;
 	}
 
 	@Override
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
-			DiskType otherType = (DiskType) otherObject;
+			DiskRack otherType = (DiskRack) otherObject;
 			return otherType.name.equals(this.name) && otherType.size.equals(this.size)
 					&& otherType.infinity.equals(this.infinity) && otherType.count.equals(this.count);
 		} else
