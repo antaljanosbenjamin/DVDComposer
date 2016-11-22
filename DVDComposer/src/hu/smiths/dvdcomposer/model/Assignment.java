@@ -1,6 +1,7 @@
 package hu.smiths.dvdcomposer.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Assignment {
 
 	private Assignment(Set<Disc> discs) {
 
-		this.discs = discs;
+		this.discs = new HashSet<Disc>(discs);
 	}
 
 	private static void checkDiscSet(Set<Disc> discs)
