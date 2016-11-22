@@ -24,18 +24,24 @@ public class ISOWriter {
 
 	private ISO9660RootDirectory root;
 
-	public void writeContentToFile(File output) throws CannotCreateISOFile, HandlerException {
+	public void dumpContentToFile(File output) throws CannotCreateISOFile, HandlerException {
 		try {
 			this.output = output;
 			initializeAll();
 			writeData();
+			setNewEmptyRootDirectory();
 		} catch (FileNotFoundException | ConfigException e) {
 			throw new CannotCreateISOFile(e);
 		}
 	}
 
 	public ISOWriter() {
-		initializeRoot();
+		setNewEmptyRootDirectory();
+	}
+	
+	public void setNewEmptyRootDirectory(){
+		ISO9660RootDirectory.MOVED_DIRECTORIES_STORE_NAME = "rr_moved";
+		root = new ISO9660RootDirectory();
 	}
 
 	public void addFolderToISOImage(File folder) throws HandlerException {
@@ -66,11 +72,6 @@ public class ISOWriter {
 		jolietConfig = new JolietConfig();
 		jolietConfig.setPublisher(System.getProperty("user.name"));
 		jolietConfig.forceDotDelimiter(true);
-	}
-
-	private void initializeRoot() {
-		ISO9660RootDirectory.MOVED_DIRECTORIES_STORE_NAME = "rr_moved";
-		root = new ISO9660RootDirectory();
 	}
 
 	private void initializeCreateISO() throws FileNotFoundException {
