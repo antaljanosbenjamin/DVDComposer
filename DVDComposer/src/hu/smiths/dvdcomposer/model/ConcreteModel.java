@@ -83,7 +83,8 @@ public class ConcreteModel implements Model {
 	public Result generateResult() throws InvalidResultException {
 		try {
 			return Result.create(algorithm.generate(new Input(discGroups, folders)));
-		} catch (NotEnoughSpaceOnDiscException | TooManyDiscsInOneGroupException | CannotFindValidAssignmentException e) {
+		} catch (NotEnoughSpaceOnDiscException | TooManyDiscsInOneGroupException
+				| CannotFindValidAssignmentException e) {
 			throw new InvalidResultException(e);
 		}
 	}

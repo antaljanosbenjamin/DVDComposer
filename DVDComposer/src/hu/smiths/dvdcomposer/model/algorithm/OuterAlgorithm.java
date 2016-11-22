@@ -46,7 +46,7 @@ public class OuterAlgorithm implements Algorithm {
 
 	private static Algorithm getNewAlgorithmInstance(Class<?> clazz)
 			throws CannotLoadAlgorithmClass, InstantiationException, IllegalAccessException {
-		
+
 		if (Algorithm.class.isAssignableFrom(clazz)) {
 			return (Algorithm) clazz.newInstance();
 		} else {

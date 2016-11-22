@@ -12,8 +12,7 @@ public class Result {
 
 	private Set<Disc> discs;
 
-	public static Result create(Set<Disc> discs)
-			throws NotEnoughSpaceOnDiscException, TooManyDiscsInOneGroupException {
+	public static Result create(Set<Disc> discs) throws NotEnoughSpaceOnDiscException, TooManyDiscsInOneGroupException {
 		throwExceptionIfDiscSetIsInvalid(discs);
 		return new Result(discs);
 	}
@@ -29,15 +28,16 @@ public class Result {
 		throwExceptionIfThereAreTooManyDiscsFromAnyGroup(discs);
 	}
 
-	private static void throwExceptionIfThereAreTooMuchUsedSpaceOnAnyDisc(Set<Disc> discs) throws NotEnoughSpaceOnDiscException {
+	private static void throwExceptionIfThereAreTooMuchUsedSpaceOnAnyDisc(Set<Disc> discs)
+			throws NotEnoughSpaceOnDiscException {
 		for (Disc disc : discs) {
 			if (!disc.spaceIsEnough())
 				throw new NotEnoughSpaceOnDiscException(
 						"Not enought space in one of " + disc.getGroup().getName() + " discs!");
 		}
 	}
-	
-	private static Map<DiscGroup, Integer> getCountsByGroup(Set<Disc> discs){
+
+	private static Map<DiscGroup, Integer> getCountsByGroup(Set<Disc> discs) {
 		Map<DiscGroup, Integer> discCountsInGroups = new HashMap<DiscGroup, Integer>();
 
 		for (Disc disc : discs) {
@@ -45,12 +45,12 @@ public class Result {
 				incrementsDiscCountInGroup(discCountsInGroups, disc.getGroup());
 			}
 		}
-		
+
 		return discCountsInGroups;
 	}
-	
 
-	private static void throwExceptionIfThereAreTooManyDiscsFromAnyGroup(Set<Disc> discs) throws TooManyDiscsInOneGroupException {
+	private static void throwExceptionIfThereAreTooManyDiscsFromAnyGroup(Set<Disc> discs)
+			throws TooManyDiscsInOneGroupException {
 
 		Map<DiscGroup, Integer> countsByGroup = getCountsByGroup(discs);
 		for (Map.Entry<DiscGroup, Integer> entry : countsByGroup.entrySet()) {

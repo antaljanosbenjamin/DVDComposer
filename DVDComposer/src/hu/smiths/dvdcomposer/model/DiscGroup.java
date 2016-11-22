@@ -36,13 +36,13 @@ public final class DiscGroup implements Serializable {
 	public Integer getSizeInBytes() {
 		return size;
 	}
-	
-	public void setCount(Integer newCount){
+
+	public void setCount(Integer newCount) {
 		this.count = newCount;
 		this.infinity = Boolean.FALSE;
 	}
-	
-	public void setCountToInfinite(){
+
+	public void setCountToInfinite() {
 		this.infinity = Boolean.TRUE;
 		count = 0;
 	}
