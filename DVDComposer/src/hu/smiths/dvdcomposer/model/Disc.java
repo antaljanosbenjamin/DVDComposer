@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 import hu.smiths.dvdcomposer.model.exceptions.TooLargeFolderException;
 
-public class Disc implements Serializable {
+public final class Disc implements Serializable {
 
 	private static final long serialVersionUID = 2967319287369484755L;
 

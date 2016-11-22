@@ -2,7 +2,7 @@ package hu.smiths.dvdcomposer.model;
 
 import java.io.Serializable;
 
-public class DiscGroup implements Serializable {
+public final class DiscGroup implements Serializable {
 
 	private static final long serialVersionUID = 6525241729717592702L;
 

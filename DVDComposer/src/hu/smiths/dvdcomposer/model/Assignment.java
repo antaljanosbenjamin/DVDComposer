@@ -7,17 +7,17 @@ import java.util.Set;
 import hu.smiths.dvdcomposer.model.exceptions.NotEnoughSpaceOnDiscException;
 import hu.smiths.dvdcomposer.model.exceptions.TooManyDiscsInOneGroupException;
 
-public class GeneratedResult {
+public class Assignment {
 
 	private Set<Disc> discs;
 
-	public static GeneratedResult create(Set<Disc> discs)
+	public static Assignment create(Set<Disc> discs)
 			throws NotEnoughSpaceOnDiscException, TooManyDiscsInOneGroupException {
 		checkDiscSet(discs);
-		return new GeneratedResult(discs);
+		return new Assignment(discs);
 	}
 
-	private GeneratedResult(Set<Disc> discs) {
+	private Assignment(Set<Disc> discs) {
 
 		this.discs = discs;
 	}
@@ -35,18 +35,25 @@ public class GeneratedResult {
 						"Not enought space in one of " + disc.getGroup().getName() + " discs!");
 		}
 	}
+	
+	private static Map<DiscGroup, Integer> getCountsByGroup(Set<Disc> discs){
+		Map<DiscGroup, Integer> discCountsInGroups = new HashMap<DiscGroup, Integer>();
+
+		for (Disc disc : discs) {
+			if (discCountsInGroups.containsKey(disc.getGroup())) {
+				incrementsDiscCountInGroup(discCountsInGroups, disc.getGroup());
+			}
+		}
+		
+		return discCountsInGroups;
+	}
+	
 
 	private static void checkDiscCountInGroups(Set<Disc> discs) throws TooManyDiscsInOneGroupException {
 
-		Map<DiscGroup, Integer> discCountInGroups = new HashMap<DiscGroup, Integer>();
+		Map<DiscGroup, Integer> countsByGroup = getCountsByGroup(discs);
 
-		for (Disc disc : discs) {
-			if (discCountInGroups.containsKey(disc.getGroup())) {
-				incrementsDiscCountInGroup(discCountInGroups, disc.getGroup());
-			}
-		}
-
-		for (Map.Entry<DiscGroup, Integer> entry : discCountInGroups.entrySet()) {
+		for (Map.Entry<DiscGroup, Integer> entry : countsByGroup.entrySet()) {
 			DiscGroup group = entry.getKey();
 			Integer countInGroup = entry.getValue();
 			if (!group.haveAtLeast(countInGroup)) {
