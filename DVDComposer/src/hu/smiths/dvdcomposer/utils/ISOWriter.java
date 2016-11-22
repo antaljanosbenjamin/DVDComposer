@@ -27,7 +27,7 @@ public class ISOWriter {
 	public void dumpContentToFile(File output) throws CannotCreateISOFile, HandlerException {
 		try {
 			this.output = output;
-			initializeAll();
+			initializeAllConfig();
 			writeData();
 			setNewEmptyRootDirectory();
 		} catch (FileNotFoundException | ConfigException e) {
@@ -50,10 +50,9 @@ public class ISOWriter {
 
 	private void writeData() throws HandlerException {
 		iso.process(iso9660Config, null, jolietConfig, null);
-
 	}
 
-	private void initializeAll() throws ConfigException, FileNotFoundException {
+	private void initializeAllConfig() throws ConfigException, FileNotFoundException {
 		initializeISOConfig();
 		initializeJolietConfig();
 		initializeCreateISO();
