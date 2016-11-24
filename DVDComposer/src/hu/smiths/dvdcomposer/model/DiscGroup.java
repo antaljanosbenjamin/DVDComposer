@@ -19,7 +19,7 @@ public final class DiscGroup implements Serializable {
 	}
 
 	public static DiscGroup createInfinite(String name, Long size) {
-		return new DiscGroup(name, size, Integer.valueOf(0), Boolean.TRUE);
+		return new DiscGroup(name, size, Integer.valueOf(-1), Boolean.TRUE);
 	}
 
 	protected DiscGroup(String name, Long size, Integer count, Boolean infinity) {
@@ -37,14 +37,21 @@ public final class DiscGroup implements Serializable {
 		return sizeInBytes;
 	}
 
+	public Integer getCount() {
+		return count;
+	}
+
 	public void setCount(Integer newCount) {
+		if (newCount < 1) {
+			throw new IllegalArgumentException("Count must be greater than zero!");
+		}
 		this.count = newCount;
 		this.infinity = Boolean.FALSE;
 	}
 
 	public void setCountToInfinite() {
 		this.infinity = Boolean.TRUE;
-		count = 0;
+		count = -1;
 	}
 
 	public Boolean haveAtLeast(Integer guessedCount) {
