@@ -16,7 +16,7 @@ public class MainApplication extends Application {
     }
 	
 	public static void main(String[] args) {
-		JarLoader loader = new JarLoader();
+//		JarLoader loader = new JarLoader();
 //		loader.load();		
 
 		System.out.println("Succes!");

@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import hu.smiths.dvdcomposer.view.extensions.NumberTextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <VBox fx:controller="hu.smiths.dvdcomposer.view.MainViewController"
       xmlns:fx="http://javafx.com/fxml" spacing="10">
 
@@ -18,32 +20,24 @@
         <Label text="DVD Composer application"  styleClass="header"/>
     </HBox>  
 
-	<GridPane fx:id="gridPane" alignment="center" hgap="10" vgap="10">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="130.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="70.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="130.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="70.0" />
-    </columnConstraints>
-	<padding>
-		<Insets top="25" right="25" bottom="25" left="25"/>
-	</padding>
-	
-	<Label text="CD (700 MB):" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <NumberTextField fx:id="cdQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-	<Label text="DVD (4.7 GB):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <NumberTextField fx:id="dvdQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-	<Label text="Blue ray (25 GB):" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <NumberTextField fx:id="brQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <TextField fx:id="otherContainerNameField" GridPane.columnIndex="0" GridPane.rowIndex="3" promptText="Container name"/>
-    <NumberTextField fx:id="otherContainerSizeField" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Size(MB)"/>
-    <NumberTextField fx:id="otherContainerQuantityField" GridPane.columnIndex="2" GridPane.rowIndex="3" promptText="Quantity"/>
-    
-	</GridPane>
-	
-    <HBox alignment="center">
-        <Button fx:id="someButton" text="Do it!" onAction="#someFunction"/>
-    </HBox>
+    <VBox alignment="center" spacing="20">
+		<TableView fx:id="tableView" maxWidth="450" maxHeight="300" editable="true">
+			<columns>
+			
+				<TableColumn  text="Disc name" fx:id="containerNameCol" minWidth="150"/>
+				<TableColumn text="Disc size"  fx:id="containerSizeCol" minWidth="150"/>
+				<TableColumn text="Disc quantity"  fx:id="containerQuantityCol" minWidth="150"/>
+			</columns>
+		</TableView>
+		
+        <HBox alignment="center" >
+        	<TextField fx:id="newDiscNameField" promptText="Disc name" minWidth="115.0"/>
+        	<NumberTextField  fx:id="newDiscSizeField" promptText="Disc size" minWidth="120.0"/>
+        	<NumberTextField fx:id="newDiscQuantityField" promptText="Disc quantity" minWidth="120.0"/>
+       		<Button fx:id="newDiscGroupButton" text="Add new disc group" onAction="#addNewDiscGroup"/>
+        </HBox>
+        
+    </VBox>
      
     </children>
 
