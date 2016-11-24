@@ -7,7 +7,10 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 
+import hu.smiths.dvdcomposer.model.exceptions.CannotAddFolderToISOImageException;
+import hu.smiths.dvdcomposer.model.exceptions.CannotCreateISOFile;
 import hu.smiths.dvdcomposer.model.exceptions.TooLargeFolderException;
+import hu.smiths.dvdcomposer.utils.ISOWriter;
 
 public final class Disc implements Serializable {
 
@@ -76,6 +79,21 @@ public final class Disc implements Serializable {
 	@Override
 	public int hashCode() {
 		return System.identityHashCode(this);
+	}
+
+	public void addAllFolderToISOWriter(ISOWriter isoWriter) throws CannotAddFolderToISOImageException {
+		for (File folder : containedFolders)
+			isoWriter.addFolderToISOImage(folder);
+	}
+
+	public void createISOFileWithWriter(File output, ISOWriter writer) throws CannotCreateISOFile {
+		try {
+			addAllFolderToISOWriter(writer);
+			System.out.println("ADDED");
+			writer.dumpContentToFile(output);
+		} catch (CannotAddFolderToISOImageException e) {
+			throw new CannotCreateISOFile(e);
+		}
 	}
 
 }

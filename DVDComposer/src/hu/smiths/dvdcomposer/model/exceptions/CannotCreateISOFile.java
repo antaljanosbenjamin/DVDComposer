@@ -7,5 +7,4 @@ public class CannotCreateISOFile extends Exception {
 	public CannotCreateISOFile(Throwable cause) {
 		super(cause);
 	}
-
 }
