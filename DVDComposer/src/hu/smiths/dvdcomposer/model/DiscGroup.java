@@ -8,23 +8,23 @@ public final class DiscGroup implements Serializable {
 
 	private String name;
 
-	private Integer size;
+	private Long sizeInBytes;
 
 	private Integer count;
 
 	private Boolean infinity;
 
-	public static DiscGroup createFinite(String name, Integer size, Integer count) {
+	public static DiscGroup createFinite(String name, Long size, Integer count) {
 		return new DiscGroup(name, size, count, Boolean.FALSE);
 	}
 
-	public static DiscGroup createInfinite(String name, Integer size) {
+	public static DiscGroup createInfinite(String name, Long size) {
 		return new DiscGroup(name, size, Integer.valueOf(0), Boolean.TRUE);
 	}
 
-	protected DiscGroup(String name, Integer size, Integer count, Boolean infinity) {
+	protected DiscGroup(String name, Long size, Integer count, Boolean infinity) {
 		this.name = name;
-		this.size = size;
+		this.sizeInBytes = size;
 		this.count = count;
 		this.infinity = infinity;
 	}
@@ -33,8 +33,8 @@ public final class DiscGroup implements Serializable {
 		return name;
 	}
 
-	public Integer getSizeInBytes() {
-		return size;
+	public Long getSizeInBytes() {
+		return sizeInBytes;
 	}
 
 	public void setCount(Integer newCount) {
@@ -59,13 +59,13 @@ public final class DiscGroup implements Serializable {
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
 			DiscGroup otherType = (DiscGroup) otherObject;
-			return otherType.name.equals(this.name) && otherType.size.equals(this.size);
+			return otherType.name.equals(this.name) && otherType.sizeInBytes.equals(this.sizeInBytes);
 		} else
 			return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return (41 * (41 * (41 * (41 + size.hashCode()) + name.hashCode()) + name.hashCode()) + size.hashCode());
+		return (41 * (41 * (41 * (41 + sizeInBytes.hashCode()) + name.hashCode()) + name.hashCode()) + sizeInBytes.hashCode());
 	}
 }

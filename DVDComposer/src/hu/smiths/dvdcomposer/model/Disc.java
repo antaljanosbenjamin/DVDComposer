@@ -20,7 +20,7 @@ public final class Disc implements Serializable {
 
 	private Set<File> containedFolders;
 
-	private Integer freeSpaceInBytes;
+	private Long freeSpaceInBytes;
 
 	public Disc(DiscGroup rack) {
 		this.group = rack;
@@ -57,8 +57,8 @@ public final class Disc implements Serializable {
 			return Boolean.FALSE;
 	}
 
-	private Integer calculateUsedSpace() {
-		Integer usedSpaceInBytes = Integer.valueOf(0);
+	private Long calculateUsedSpace() {
+		Long usedSpaceInBytes = Long.valueOf(0);
 
 		for (File folder : containedFolders) {
 			usedSpaceInBytes += getFolderSize(folder);
