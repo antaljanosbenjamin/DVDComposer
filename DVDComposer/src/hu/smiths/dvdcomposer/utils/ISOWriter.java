@@ -10,6 +10,7 @@ import de.tu_darmstadt.informatik.rbg.hatlak.iso9660.impl.ISO9660Config;
 import de.tu_darmstadt.informatik.rbg.hatlak.iso9660.impl.ISOImageFileHandler;
 import de.tu_darmstadt.informatik.rbg.hatlak.joliet.impl.JolietConfig;
 import de.tu_darmstadt.informatik.rbg.mhartle.sabre.HandlerException;
+import hu.smiths.dvdcomposer.model.exceptions.CannotAddFolderToISOImageException;
 import hu.smiths.dvdcomposer.model.exceptions.CannotCreateISOFile;
 
 public class ISOWriter {
@@ -24,13 +25,13 @@ public class ISOWriter {
 
 	private ISO9660RootDirectory root;
 
-	public void dumpContentToFile(File output) throws CannotCreateISOFile, HandlerException {
+	public void dumpContentToFile(File output) throws CannotCreateISOFile {
 		try {
 			this.output = output;
 			initializeAllConfig();
 			writeData();
 			setNewEmptyRootDirectory();
-		} catch (FileNotFoundException | ConfigException e) {
+		} catch (FileNotFoundException | ConfigException | HandlerException e) {
 			throw new CannotCreateISOFile(e);
 		}
 	}
@@ -38,14 +39,18 @@ public class ISOWriter {
 	public ISOWriter() {
 		setNewEmptyRootDirectory();
 	}
-	
-	public void setNewEmptyRootDirectory(){
+
+	public void setNewEmptyRootDirectory() {
 		ISO9660RootDirectory.MOVED_DIRECTORIES_STORE_NAME = "rr_moved";
 		root = new ISO9660RootDirectory();
 	}
 
-	public void addFolderToISOImage(File folder) throws HandlerException {
-		root.addRecursively(folder);
+	public void addFolderToISOImage(File folder) throws CannotAddFolderToISOImageException {
+		try {
+			root.addRecursively(folder);
+		} catch (HandlerException e) {
+			throw new CannotAddFolderToISOImageException(e);
+		}
 	}
 
 	private void writeData() throws HandlerException {
