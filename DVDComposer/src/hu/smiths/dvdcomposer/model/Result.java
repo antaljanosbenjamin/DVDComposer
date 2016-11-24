@@ -65,7 +65,7 @@ public class Result {
 			DiscGroup group = entry.getKey();
 			Integer countInGroup = entry.getValue();
 			if (!group.haveAtLeast(countInGroup)) {
-				throw new TooManyDiscsInOneGroupException("Too more discs in " + group.getName() + " group!");
+				throw new TooManyDiscsInOneGroupException("Too many discs in " + group.getName() + " group!");
 			}
 		}
 	}
