@@ -41,6 +41,10 @@ public final class DiscGroup implements Serializable {
 		return count;
 	}
 
+	public boolean getInfinity() {
+		return infinity;
+	}
+
 	public void setCount(Integer newCount) {
 		if (newCount < 1) {
 			throw new IllegalArgumentException("Count must be greater than zero!");

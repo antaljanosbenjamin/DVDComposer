@@ -13,7 +13,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <VBox fx:controller="hu.smiths.dvdcomposer.view.MainViewController"
-      xmlns:fx="http://javafx.com/fxml" spacing="10">
+      xmlns:fx="http://javafx.com/fxml" spacing="30">
 
     <children>
     <HBox alignment="center">
@@ -21,12 +21,14 @@
     </HBox>  
 
     <VBox alignment="center" spacing="20">
-		<TableView fx:id="tableView" maxWidth="450" maxHeight="300" editable="true">
+		<TableView fx:id="tableView" maxWidth="570" maxHeight="300" editable="true">
 			<columns>
 			
 				<TableColumn  text="Disc name" fx:id="containerNameCol" minWidth="150"/>
 				<TableColumn text="Disc size"  fx:id="containerSizeCol" minWidth="150"/>
 				<TableColumn text="Disc quantity"  fx:id="containerQuantityCol" minWidth="150"/>
+				<TableColumn fx:id="containerInfinityCol" minWidth="50"/>
+				<TableColumn fx:id="containerDeleteCol" minWidth="70"/>
 			</columns>
 		</TableView>
 		
@@ -38,6 +40,12 @@
         </HBox>
         
     </VBox>
+    <HBox  spacing="60"  alignment="center" >
+	       		<Button text="Save model" minHeight="40" minWidth="100" onAction="#saveModelAction"/>
+	       		<Button text="Load model" minHeight="40" minWidth="100" onAction="#loadModel"/>
+	       		<Button text="Next" minHeight="40" minWidth="100" onAction="#next"/>
+	</HBox>
+
      
     </children>
 
