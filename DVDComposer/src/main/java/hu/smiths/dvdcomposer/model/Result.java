@@ -51,6 +51,8 @@ public class Result {
 		for (Disc disc : discs) {
 			if (discCountsInGroups.containsKey(disc.getGroup())) {
 				incrementsDiscCountInGroup(discCountsInGroups, disc.getGroup());
+			} else {
+				discCountsInGroups.put(disc.getGroup(), Integer.valueOf(1));
 			}
 		}
 
