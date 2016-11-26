@@ -109,9 +109,20 @@ public class ConcreteModel implements Model {
 	}
 
 	private boolean everyFieldOfReturnedGroupsAreTheSameAsPassedGroups() {
-		// TODO
+		for(DiscGroup passedGroup : discGroups){
+			if (!everyEqualReturnedGroupsAreTheAse(passedGroup)){
+				return false;
+			}
+		}
 		return true;
-		//for()
+	}
+
+	private boolean everyEqualReturnedGroupsAreTheAse(DiscGroup passedGroup) {
+		for(DiscGroup returnedGroup : returnedGroups){
+			if (passedGroup.equals(returnedGroup) && !passedGroup.allFieldsAreEquals(returnedGroup))
+				return false;
+		}
+		return true;
 	}
 
 	private boolean thereAreLessOrEqualsReturnedGroup() {

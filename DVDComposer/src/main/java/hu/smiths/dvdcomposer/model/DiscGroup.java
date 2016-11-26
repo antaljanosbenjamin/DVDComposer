@@ -73,7 +73,12 @@ public final class DiscGroup implements Serializable {
 		return name.equals(otherGroup.name) && sizeInBytes.equals(otherGroup.sizeInBytes)
 				&& count.equals(otherGroup.count) && infinity.equals(otherGroup.infinity);
 	}
-
+	
+	@Override
+	public DiscGroup clone(){
+		return new DiscGroup(name, sizeInBytes, count, infinity);
+	}
+	
 	@Override
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
