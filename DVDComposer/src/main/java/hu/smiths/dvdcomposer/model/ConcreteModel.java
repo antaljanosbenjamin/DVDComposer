@@ -71,11 +71,20 @@ public class ConcreteModel implements Model {
 
 	@Override
 	public void setFolders(Set<File> folders) {
+		if (containsAnyNoFolder(folders)) {
+			throw new IllegalArgumentException("There is at least one no folder is the passed set!");
+		}
 		this.folders = new HashSet<File>(folders);
+	}
+
+	private boolean containsAnyNoFolder(Set<File> folders) {
+		return (folders.stream().anyMatch(f -> !f.isDirectory()));
 	}
 
 	@Override
 	public boolean addFolder(File folder) {
+		if (!folder.isDirectory())
+			throw new IllegalArgumentException(folder.getAbsolutePath() + " is not a folder!");
 		return folders.add(folder);
 
 	}
