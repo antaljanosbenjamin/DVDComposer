@@ -28,7 +28,4 @@ public interface Model extends Serializable {
 	public Result generateResult() throws InvalidResultException;
 
 	public void setAlgorithm(Algorithm algorithm);
-	
-	public Algorithm getAlgorithm();
-
 }

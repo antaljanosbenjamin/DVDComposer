@@ -93,10 +93,6 @@ public class ConcreteModel implements Model {
 	public void setAlgorithm(Algorithm algorithm) {
 		this.algorithm = algorithm;
 	}
-
-	public Algorithm getAlgorithm() {
-		return algorithm;
-	}
 	
 	
 }
