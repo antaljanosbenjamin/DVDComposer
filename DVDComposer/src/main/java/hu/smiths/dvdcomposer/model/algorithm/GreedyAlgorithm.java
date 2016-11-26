@@ -1,6 +1,5 @@
 package hu.smiths.dvdcomposer.model.algorithm;
 
-
 import static hu.smiths.dvdcomposer.model.FolderUtils.getFolderSize;
 
 import java.io.File;
@@ -20,17 +19,17 @@ import hu.smiths.dvdcomposer.model.exceptions.CannotFindValidAssignmentException
 public class GreedyAlgorithm implements Algorithm {
 
 	private List<DiscGroup> discGroups;
-	
+
 	private DiscGroup currentGroup;
 
 	private List<File> folders;
 
 	private Set<Disc> generatedDiscs;
-	
+
 	private Map<DiscGroup, Integer> countInGroups;
-	
+
 	@Override
-	public Set<Disc> generate(Input input) throws CannotFindValidAssignmentException{
+	public Set<Disc> generate(Input input) throws CannotFindValidAssignmentException {
 		throwsIfInputIsInvalid(input);
 		initialize(input);
 		assignFoldersToDiscs();
@@ -47,13 +46,13 @@ public class GreedyAlgorithm implements Algorithm {
 	}
 
 	private void sortFolders() {
-		Collections.sort(folders, new Comparator<File>(){
+		Collections.sort(folders, new Comparator<File>() {
 			@Override
 			public int compare(File lhs, File rhs) {
-				return getFolderSize(lhs).compareTo(getFolderSize(rhs));
-			}			
+				return getFolderSize(rhs).compareTo(getFolderSize(lhs));
+			}
 		});
-		
+
 	}
 
 	private void throwsIfInputIsInvalid(Input input) {
@@ -71,59 +70,67 @@ public class GreedyAlgorithm implements Algorithm {
 		if (discGroups.size() == 0)
 			throw new IllegalArgumentException("Input must have contains at least one disc group!");
 	}
-	
-	private void assignFoldersToDiscs() throws CannotFindValidAssignmentException{
-		for(File folder : folders){
-			if (thereIsEnoughSpaceForFolderInAnyDisc(folder)){
+
+	private void assignFoldersToDiscs() throws CannotFindValidAssignmentException {
+		for (File folder : folders) {
+			if (thereIsEnoughSpaceForFolderInAnyDisc(folder)) {
 				assignFolderToExistingDisc(folder);
 			} else {
 				assignFolderToNewDisc(folder);
 			}
 		}
 	}
-	
+
 	private boolean thereIsEnoughSpaceForFolderInAnyDisc(File folder) {
-		for(Disc disc : generatedDiscs){
+		for (Disc disc : generatedDiscs) {
 			if (disc.thereIsEnoughSpaceForTheFolder(folder))
 				return true;
 		}
 		return false;
 	}
-	
-	private void assignFolderToNewDisc(File folder) throws CannotFindValidAssignmentException{
+
+	private void assignFolderToNewDisc(File folder) throws CannotFindValidAssignmentException {
 		adjustGroupForFolder(folder);
-		generateNewDiscFromCurrentGroup().addFolder(folder);		
+		generateNewDiscFromCurrentGroup().addFolder(folder);
 	}
 
 	private void assignFolderToExistingDisc(File folder) {
-		for(Disc disc : generatedDiscs){
-			if (disc.thereIsEnoughSpaceForTheFolder(folder)){
+		for (Disc disc : generatedDiscs) {
+			if (disc.thereIsEnoughSpaceForTheFolder(folder)) {
 				disc.addFolder(folder);
 				return;
 			}
 		}
 	}
-	
-	private void adjustGroupForFolder(File folder) throws CannotFindValidAssignmentException{
-		for(DiscGroup group : discGroups){
-			if (isRightGroupForFolder(group, folder))
+
+	private void adjustGroupForFolder(File folder) throws CannotFindValidAssignmentException {
+		for (DiscGroup group : discGroups) {
+			if (isRightGroupForFolder(group, folder)){
 				currentGroup = group;
-			return;
+				return;
+			}
 		}
-		throw new CannotFindValidAssignmentException("Cannot find right group for " + folder.getAbsolutePath() +" folder!");
+		throw new CannotFindValidAssignmentException(
+				"Cannot find right group for " + folder.getAbsolutePath() + " folder! Size: " + getFolderSize(folder));
 	}
-	
+
 	private boolean isRightGroupForFolder(DiscGroup group, File folder) {
-		return group.haveMoreThan(getCountInGroup(group)) && group.getSizeInBytes() >= getFolderSize(folder);
-	}	
-	
+		return group.haveMoreThan(getCountInGroup(group)) && (group.getSizeInBytes() >= getFolderSize(folder));
+	}
+
 	private Disc generateNewDiscFromCurrentGroup() {
 		Disc newDisc = new Disc(currentGroup);
 		generatedDiscs.add(newDisc);
-		return newDisc;		
+		incrementDiscCountInCurrentGroup();
+		return newDisc;
 	}
-	
-	private Integer getCountInGroup(DiscGroup guessedGroup){
+
+	private void incrementDiscCountInCurrentGroup() {
+		countInGroups.put(currentGroup, getCountInGroup(currentGroup) + 1);
+
+	}
+
+	private Integer getCountInGroup(DiscGroup guessedGroup) {
 		return countInGroups.getOrDefault(currentGroup, Integer.valueOf(0));
 	}
 
