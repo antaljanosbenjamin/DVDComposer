@@ -66,6 +66,7 @@ public class MainViewController extends ModelController {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initializeModel();
+		data.addAll(ModelManager.getModel().getDiscGroups());
 
 		containerNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		containerSizeCol.setCellValueFactory(cellData -> new SimpleLongProperty(cellData.getValue().getSizeInBytes()));
@@ -135,9 +136,6 @@ public class MainViewController extends ModelController {
 			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("CD", CD_SIZE, 0));
 			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("DVD", DVD_SIZE, 0));
 			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("BR", BR_SIZE, 0));
-		} else {
-			data.clear();
-			data.setAll(ModelManager.getModel().getDiscGroups());
 		}
 	}
 
