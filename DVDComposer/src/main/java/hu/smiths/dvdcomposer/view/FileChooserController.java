@@ -19,7 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.DirectoryChooser;
 
-public class FileChooserViewController extends ModelController {
+public class FileChooserController extends ModelController {
 
 	@FXML
 	private TableView<File> tableFolderView;
@@ -49,7 +49,7 @@ public class FileChooserViewController extends ModelController {
 		chooser.setTitle("Open File");
 		File selectedFolder = chooser.showDialog(SceneManager.getInstance().getPrimaryStage());
 		if (selectedFolder != null) {
-			data.add(selectedFolder);
+			data.addAll(selectedFolder.listFiles());
 		}
 	}
 

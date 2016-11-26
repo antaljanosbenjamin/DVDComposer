@@ -14,11 +14,10 @@
     </HBox>  
     <VBox alignment="center" spacing="20">
 		<Label  fx:id="choosenAlgorithmLabel" maxWidth="600"/>
-		<TextField  fx:id="classNameField" maxWidth="600"/>
+		<TextField  fx:id="classNameField" maxWidth="600" promptText="Name of the class of the algorithm"/>
 		
         <VBox alignment="center" spacing="30" >
        		<Button text="Select new algorithm" onAction="#chooseAlgorithm"/>
-       		<Button text="Generate the algorithm" onAction="#generateAlgorithm"/>
         </VBox>
 	    <HBox  spacing="60"  alignment="center" >
 		       		<Button text="Prev" minHeight="40" minWidth="100" onAction="#prev"/>

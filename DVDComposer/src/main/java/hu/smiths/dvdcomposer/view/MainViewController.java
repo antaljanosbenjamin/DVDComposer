@@ -13,7 +13,10 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,13 +25,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 import javafx.util.converter.NumberStringConverter;
 
 public class MainViewController extends ModelController {
@@ -55,7 +62,7 @@ public class MainViewController extends ModelController {
 	@FXML
 	TableColumn<DiscGroup, Number> containerQuantityCol;
 	@FXML
-	TableColumn<DiscGroup, Boolean> containerInfinityCol;
+	TableColumn containerInfinityCol;
 	@FXML
 	TableColumn<DiscGroup, DiscGroup> containerDeleteCol;
 
@@ -63,6 +70,7 @@ public class MainViewController extends ModelController {
 
 	int bonusContainerNumber = 0;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initializeModel();
@@ -71,11 +79,52 @@ public class MainViewController extends ModelController {
 		containerNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		containerSizeCol.setCellValueFactory(cellData -> new SimpleLongProperty(cellData.getValue().getSizeInBytes()));
 		containerQuantityCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCount()));
-		containerInfinityCol.setCellFactory(CheckBoxTableCell.forTableColumn(containerInfinityCol));
-		containerInfinityCol
-				.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().getInfinity()));
 
-		containerDeleteCol.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		containerQuantityCol
+				.setCellFactory(TextFieldTableCell.<DiscGroup, Number>forTableColumn(new NumberStringConverter()));
+		containerQuantityCol.setOnEditCommit((CellEditEvent<DiscGroup, Number> t) -> {
+			((DiscGroup) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setCount(t.getNewValue().intValue());
+			if (t.getNewValue().equals(-1)) {
+				t.getTableColumn().setText("Infinite");
+			}
+			t.getTableView().refresh();
+		});
+		
+		containerInfinityCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DiscGroup, CheckBox>, ObservableValue<CheckBox>>() {
+
+            @Override
+            public ObservableValue<CheckBox> call(
+                    TableColumn.CellDataFeatures<DiscGroup, CheckBox> arg0) {
+            	DiscGroup user = arg0.getValue();
+
+                CheckBox checkBox = new CheckBox();
+
+                checkBox.selectedProperty().setValue(user.getInfinity());
+
+
+
+                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    public void changed(ObservableValue<? extends Boolean> ov,
+                            Boolean old_val, Boolean new_val) {
+                    	if(user.getInfinity()) {
+                    		user.setCount(1);
+                    	} else {
+                            user.setCountToInfinite();
+                    	}
+                        arg0.getTableView().refresh();
+                    }
+                });
+
+                return new SimpleObjectProperty<CheckBox>(checkBox);
+
+            }
+
+
+        });
+		containerDeleteCol.setCellValueFactory(
+			    param -> new ReadOnlyObjectWrapper<>(param.getValue())
+			);
 		containerDeleteCol.setCellFactory(param -> new TableCell<DiscGroup, DiscGroup>() {
 			private final Button deleteButton = new Button("Delete");
 
@@ -93,8 +142,6 @@ public class MainViewController extends ModelController {
 			}
 		});
 
-		containerQuantityCol
-				.setCellFactory(TextFieldTableCell.<DiscGroup, Number>forTableColumn(new NumberStringConverter()));
 		tableView.setEditable(true);
 		tableView.setItems(data);
 
@@ -133,9 +180,9 @@ public class MainViewController extends ModelController {
 	private void initializeModel() {
 		if (ModelManager.getModel() == null) {
 			ModelManager.setModel(new ConcreteModel());
-			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("CD", CD_SIZE, 0));
-			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("DVD", DVD_SIZE, 0));
-			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("BR", BR_SIZE, 0));
+			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("CD", CD_SIZE, 1));
+			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("DVD", DVD_SIZE, 1));
+			ModelManager.getModel().addDiscGroup(DiscGroup.createFinite("BR", BR_SIZE, 1));
 		}
 	}
 
