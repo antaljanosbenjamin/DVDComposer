@@ -105,7 +105,7 @@ public class GreedyAlgorithm implements Algorithm {
 
 	private void adjustGroupForFolder(File folder) throws CannotFindValidAssignmentException {
 		for (DiscGroup group : discGroups) {
-			if (isRightGroupForFolder(group, folder)){
+			if (isRightGroupForFolder(group, folder)) {
 				currentGroup = group;
 				return;
 			}

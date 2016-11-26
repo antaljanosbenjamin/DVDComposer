@@ -100,17 +100,19 @@ public class ConcreteModel implements Model {
 	private void throwsIfGeneratedDiscsContainsInvalidGroup() throws InvalidResultException {
 		returnedGroups = getGroupsFromGeneratedDiscs();
 		if (!sourceAndGeneratedGroupsAreTheSame()) {
-			throw new InvalidResultException("At least one of the generated discs contains a group that is not in the source groups!");
+			throw new InvalidResultException(
+					"At least one of the generated discs contains a group that is not in the source groups!");
 		}
 	}
 
 	private boolean sourceAndGeneratedGroupsAreTheSame() {
-		return passedGroupsContainAllReturnedGroup() && thereAreLessOrEqualsReturnedGroup() && everyFieldOfReturnedGroupsAreTheSameAsPassedGroups(); 
+		return passedGroupsContainAllReturnedGroup() && thereAreLessOrEqualsReturnedGroup()
+				&& everyFieldOfReturnedGroupsAreTheSameAsPassedGroups();
 	}
 
 	private boolean everyFieldOfReturnedGroupsAreTheSameAsPassedGroups() {
-		for(DiscGroup passedGroup : discGroups){
-			if (!everyEqualReturnedGroupsAreTheAse(passedGroup)){
+		for (DiscGroup passedGroup : discGroups) {
+			if (!everyEqualReturnedGroupsAreTheAse(passedGroup)) {
 				return false;
 			}
 		}
@@ -118,7 +120,7 @@ public class ConcreteModel implements Model {
 	}
 
 	private boolean everyEqualReturnedGroupsAreTheAse(DiscGroup passedGroup) {
-		for(DiscGroup returnedGroup : returnedGroups){
+		for (DiscGroup returnedGroup : returnedGroups) {
 			if (passedGroup.equals(returnedGroup) && !passedGroup.allFieldsAreEquals(returnedGroup))
 				return false;
 		}
@@ -146,6 +148,5 @@ public class ConcreteModel implements Model {
 	public void setAlgorithm(Algorithm algorithm) {
 		this.algorithm = algorithm;
 	}
-	
-	
+
 }

@@ -91,12 +91,12 @@ public final class Disc implements Serializable {
 			throw new CannotCreateISOFile(e);
 		}
 	}
-	
-	public boolean thereIsEnoughSpaceForTheFolder(File folder){
+
+	public boolean thereIsEnoughSpaceForTheFolder(File folder) {
 		return freeSpaceInBytes >= getFolderSize(folder);
 	}
-	
-	public Set<File> getFolders(){
+
+	public Set<File> getFolders() {
 		return containedFolders;
 	}
 
