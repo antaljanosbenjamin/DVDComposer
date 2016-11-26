@@ -2,9 +2,11 @@ package hu.smiths.dvdcomposer.view;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 
@@ -15,8 +17,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.DirectoryChooser;
 
 public class FileChooserController extends ModelController {
@@ -39,7 +44,8 @@ public class FileChooserController extends ModelController {
 		folderNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		folderPathCol
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPath().toString()));
-		folderSizeCol.setCellValueFactory(cellData -> new SimpleLongProperty(FileUtils.sizeOfDirectory(cellData.getValue())));
+		folderSizeCol.setCellValueFactory(cellData -> new SimpleLongProperty(cellData.getValue().isDirectory() ?
+				FileUtils.sizeOfDirectory(cellData.getValue()) : cellData.getValue().length()));
 
 		tableFolderView.setItems(data);
 	}
@@ -49,7 +55,8 @@ public class FileChooserController extends ModelController {
 		chooser.setTitle("Open File");
 		File selectedFolder = chooser.showDialog(SceneManager.getInstance().getPrimaryStage());
 		if (selectedFolder != null) {
-			data.addAll(selectedFolder.listFiles());
+			data.addAll(Arrays.asList(selectedFolder.listFiles()).stream().filter(f -> f.isDirectory())
+					.collect(Collectors.toSet()));
 		}
 	}
 
@@ -58,8 +65,15 @@ public class FileChooserController extends ModelController {
 	}
 
 	public void next(ActionEvent event) {
-		refreshModel();
-		SceneManager.getInstance().changeScene("/fxml/algorithmChooserView.fxml");
+		if (!data.isEmpty()) {
+			refreshModel();
+			SceneManager.getInstance().changeScene("/fxml/algorithmChooserView.fxml");
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Alert!");
+			alert.setHeaderText("Please select at least one folder to continue.");
+			alert.showAndWait().filter(response -> response == ButtonType.OK);
+		}
 	}
 
 	public void prev(ActionEvent event) {

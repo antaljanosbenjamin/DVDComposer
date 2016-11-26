@@ -7,6 +7,12 @@
 .header{
 	-fx-text-align: center;
 	-fx-font-weight: bold;
-    -fx-base: rgb(200, 182, 168);
+	-fx-text-fill: rgb(200, 182, 168);
 	-fx-font-size: 24px;
+}
+
+.warning{
+	-fx-font-weight: bold;
+	-fx-text-fill: rgb(255, 85, 85);
+	-fx-font-size: 14px;
 }

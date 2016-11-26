@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import hu.smiths.dvdcomposer.model.ModelManager;
 import hu.smiths.dvdcomposer.model.Result;
+import hu.smiths.dvdcomposer.model.algorithm.GreedyAlgorithm;
 import hu.smiths.dvdcomposer.model.exceptions.InvalidResultException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -29,9 +31,27 @@ public class ResultController extends ModelController {
 	}
 	
 	private void fillTree() {
-		TreeItem<File> root = new TreeItem<>(new File(result.getDiscs().iterator().next().getGroup().getName()));
+		TreeItem<File> root = new TreeItem<>(new File(""));
+		result.getDiscs().forEach(disc -> {
+			TreeItem<File> discItem = new TreeItem<>(new File(disc.getGroup().getName()));
+			root.getChildren().add(discItem);
+			discItem.setExpanded(true);
+			disc.getFolders().forEach(folder -> {
+				TreeItem<File> item = new TreeItem<>(folder);
+				discItem.getChildren().add(item);
+			});
+		});
 		root.setExpanded(true);
+		
+		
 		treeView.setRoot(root);
+	}
+	
+	public void prev(ActionEvent event) {
+		SceneManager.getInstance().changeScene("/fxml/algorithmChooserView.fxml");
+	}
+	
+	public void generateIso(ActionEvent event) {
 	}
 	
 }

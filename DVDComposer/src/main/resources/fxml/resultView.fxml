@@ -3,9 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import hu.smiths.dvdcomposer.view.extensions.NumberTextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeView?>
 <VBox fx:controller="hu.smiths.dvdcomposer.view.ResultController"
       xmlns:fx="http://javafx.com/fxml" spacing="10">
 
@@ -13,9 +10,15 @@
     <HBox alignment="center">
         <Label text="DVD Composer application"  styleClass="header"/>
     </HBox>  
-    <VBox alignment="center" spacing="20">
-		<TreeView fx:id="treeView"></TreeView>        
+    
+    <VBox alignment="center" >
+		<TreeView fx:id="treeView" maxHeight="350" maxWidth="600"></TreeView>        
     </VBox>
+    
+	    <HBox  spacing="60"  alignment="center" >
+		       		<Button text="Prev" minHeight="40" minWidth="100" onAction="#prev"/>
+		       		<Button text="ISO file generation" minHeight="40" minWidth="100" onAction="#generateIso"/>
+		</HBox>
     
     </children>
 
