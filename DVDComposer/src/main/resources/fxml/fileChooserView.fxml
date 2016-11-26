@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import hu.smiths.dvdcomposer.view.extensions.NumberTextField?>
-<VBox fx:controller="hu.smiths.dvdcomposer.view.FileChooserViewController"
+<VBox fx:controller="hu.smiths.dvdcomposer.view.FileChooserController"
       xmlns:fx="http://javafx.com/fxml" spacing="10">
 
     <children>

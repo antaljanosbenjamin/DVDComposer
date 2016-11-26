@@ -17,9 +17,9 @@
 			
 				<TableColumn  text="Disc name" fx:id="containerNameCol" minWidth="150"/>
 				<TableColumn text="Disc size"  fx:id="containerSizeCol" minWidth="150"/>
-				<TableColumn text="Disc quantity"  fx:id="containerQuantityCol" minWidth="150"/>
-				<TableColumn fx:id="containerInfinityCol" minWidth="50"/>
-				<TableColumn fx:id="containerDeleteCol" minWidth="70"/>
+				<TableColumn text="Disc quantity"  fx:id="containerQuantityCol" minWidth="130"/>
+				<TableColumn text="Unlimited" fx:id="containerInfinityCol" minWidth="50"/>
+				<TableColumn text="Delete" fx:id="containerDeleteCol" minWidth="70"/>
 			</columns>
 		</TableView>
 		
