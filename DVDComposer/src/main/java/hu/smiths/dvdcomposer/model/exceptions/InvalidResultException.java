@@ -7,4 +7,8 @@ public class InvalidResultException extends Exception {
 	public InvalidResultException(Throwable cause) {
 		super(cause);
 	}
+	
+	public InvalidResultException(String message){
+		super(message);
+	}
 }

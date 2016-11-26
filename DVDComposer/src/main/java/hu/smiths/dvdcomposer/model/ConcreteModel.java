@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import hu.smiths.dvdcomposer.model.algorithm.Algorithm;
 import hu.smiths.dvdcomposer.model.algorithm.Input;
@@ -22,6 +24,10 @@ public class ConcreteModel implements Model {
 	private Set<File> folders;
 
 	private Algorithm algorithm;
+
+	private Set<Disc> generatedDiscs;
+
+	private List<DiscGroup> returnedGroups;
 
 	public ConcreteModel() {
 		discGroups = new HashSet<DiscGroup>();
@@ -82,11 +88,47 @@ public class ConcreteModel implements Model {
 	@Override
 	public Result generateResult() throws InvalidResultException {
 		try {
-			return Result.create(algorithm.generate(new Input(discGroups, folders)));
+			generatedDiscs = algorithm.generate(getNewInputForAlgorithm());
+			throwsIfGeneratedDiscsContainsInvalidGroup();
+			return Result.create(generatedDiscs);
 		} catch (NotEnoughSpaceOnDiscException | TooManyDiscsInOneGroupException
 				| CannotFindValidAssignmentException e) {
 			throw new InvalidResultException(e);
 		}
+	}
+
+	private void throwsIfGeneratedDiscsContainsInvalidGroup() throws InvalidResultException {
+		returnedGroups = getGroupsFromGeneratedDiscs();
+		if (!sourceAndGeneratedGroupsAreTheSame()) {
+			throw new InvalidResultException("At least one of the generated discs contains a group that is not in the source groups!");
+		}
+	}
+
+	private boolean sourceAndGeneratedGroupsAreTheSame() {
+		return passedGroupsContainAllReturnedGroup() && thereAreLessOrEqualsReturnedGroup() && everyFieldOfReturnedGroupsAreTheSameAsPassedGroups(); 
+	}
+
+	private boolean everyFieldOfReturnedGroupsAreTheSameAsPassedGroups() {
+		// TODO
+		return true;
+		//for()
+	}
+
+	private boolean thereAreLessOrEqualsReturnedGroup() {
+		Set<DiscGroup> distinctReturnedGroups = new HashSet<DiscGroup>(returnedGroups);
+		return discGroups.size() >= distinctReturnedGroups.size();
+	}
+
+	private boolean passedGroupsContainAllReturnedGroup() {
+		return discGroups.containsAll(returnedGroups);
+	}
+
+	private List<DiscGroup> getGroupsFromGeneratedDiscs() {
+		return generatedDiscs.stream().map(d -> d.getGroup()).collect(Collectors.toList());
+	}
+
+	private Input getNewInputForAlgorithm() {
+		return new Input(discGroups.stream().map(dc -> dc.clone()).collect(Collectors.toSet()), folders);
 	}
 
 	@Override

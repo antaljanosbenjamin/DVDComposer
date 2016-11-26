@@ -15,6 +15,9 @@ public final class DiscGroup implements Serializable {
 	private Boolean infinity;
 
 	public static DiscGroup createFinite(String name, Long size, Integer count) {
+		if (count < 1) {
+			throw new IllegalArgumentException("Count must be greater than zero!");
+		}
 		return new DiscGroup(name, size, count, Boolean.FALSE);
 	}
 
@@ -66,6 +69,11 @@ public final class DiscGroup implements Serializable {
 		return infinity || count > guessedCount;
 	}
 
+	public boolean allFieldsAreEquals(DiscGroup otherGroup) {
+		return name.equals(otherGroup.name) && sizeInBytes.equals(otherGroup.sizeInBytes)
+				&& count.equals(otherGroup.count) && infinity.equals(otherGroup.infinity);
+	}
+
 	@Override
 	public boolean equals(Object otherObject) {
 		if (otherObject.getClass().equals(getClass())) {
@@ -77,6 +85,7 @@ public final class DiscGroup implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return (41 * (41 * (41 * (41 + sizeInBytes.hashCode()) + name.hashCode()) + name.hashCode()) + sizeInBytes.hashCode());
+		return (41 * (41 * (41 * (41 + sizeInBytes.hashCode()) + name.hashCode()) + name.hashCode())
+				+ sizeInBytes.hashCode());
 	}
 }

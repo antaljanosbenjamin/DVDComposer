@@ -1,11 +1,11 @@
 package hu.smiths.dvdcomposer.model;
 
+import static hu.smiths.dvdcomposer.model.FolderUtils.getFolderSize;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.apache.commons.io.FileUtils;
 
 import hu.smiths.dvdcomposer.model.exceptions.CannotAddFolderToISOImageException;
 import hu.smiths.dvdcomposer.model.exceptions.CannotCreateISOFile;
@@ -22,8 +22,8 @@ public final class Disc implements Serializable {
 
 	private Long freeSpaceInBytes;
 
-	public Disc(DiscGroup rack) {
-		this.group = rack;
+	public Disc(DiscGroup group) {
+		this.group = group;
 		this.containedFolders = new HashSet<File>();
 		this.freeSpaceInBytes = group.getSizeInBytes();
 	}
@@ -32,8 +32,8 @@ public final class Disc implements Serializable {
 		return group;
 	}
 
-	public void setGroup(DiscGroup rack) {
-		this.group = rack;
+	public void setGroup(DiscGroup group) {
+		this.group = group;
 	}
 
 	public void addFolder(File folder) {
@@ -67,10 +67,6 @@ public final class Disc implements Serializable {
 		return usedSpaceInBytes;
 	}
 
-	private Integer getFolderSize(File folder) {
-		return (int) FileUtils.sizeOfDirectory(folder);
-	}
-
 	@Override
 	public boolean equals(Object object) {
 		return object == this;
@@ -94,6 +90,14 @@ public final class Disc implements Serializable {
 		} catch (CannotAddFolderToISOImageException e) {
 			throw new CannotCreateISOFile(e);
 		}
+	}
+	
+	public boolean thereIsEnoughSpaceForTheFolder(File folder){
+		return freeSpaceInBytes >= getFolderSize(folder);
+	}
+	
+	public Set<File> getFolders(){
+		return containedFolders;
 	}
 
 }
