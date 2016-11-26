@@ -33,6 +33,7 @@ public class SceneManager {
 		}
 	    Scene scene = new Scene(SceneManager.getInstance().getParent(), 640, 480);
         scene.getStylesheets().add("/css/composer.css");
+        primaryStage.close();
 	    primaryStage.setScene(scene);
 	
 	    primaryStage.show();

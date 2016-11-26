@@ -24,12 +24,13 @@ public class ModelController implements Initializable{
 	    chooser.setSelectedExtensionFilter(new ExtensionFilter("Serialized files (*.ser)", "*.ser"));
 	    File selectedFile = chooser.showSaveDialog(SceneManager.getInstance().getPrimaryStage());
 	    
-	    
-		try {
-			ModelManager.saveToFile(selectedFile);
-		} catch (CannotSaveModel e) {
-			e.printStackTrace();
-		};
+	    if (selectedFile != null) {
+			try {
+				ModelManager.saveToFile(selectedFile);
+			} catch (CannotSaveModel e) {
+				e.printStackTrace();
+			};
+	    }
 	}
 
 	public void loadModel(ActionEvent event) {
@@ -37,12 +38,14 @@ public class ModelController implements Initializable{
 	    chooser.setTitle("Open model");
 	    chooser.setSelectedExtensionFilter(new ExtensionFilter("Serialized files (*.ser)", "*.ser"));
 	    File selectedFile = chooser.showOpenDialog(SceneManager.getInstance().getPrimaryStage());
-	    
-	    try {
-			ModelManager.loadAndStoreFromFile(selectedFile);
-		} catch (CannotLoadModel e) {
-			e.printStackTrace();
-		}
+
+	    if (selectedFile != null) {
+		    try {
+				ModelManager.setModel(ModelManager.loadAndStoreFromFile(selectedFile));
+			} catch (CannotLoadModel e) {
+				e.printStackTrace();
+			}
+	    }
 	}
 	
 	

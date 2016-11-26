@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.*?>
-
-<VBox spacing="10" >
-       		<Button fx:id="123" text="Add new disc group"/>
-       		<Button fx:id="12334" text="Add new disc group"/>
-</VBox>
-
