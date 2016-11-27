@@ -9,6 +9,9 @@ import hu.smiths.dvdcomposer.model.exceptions.CannotLoadModel;
 import hu.smiths.dvdcomposer.model.exceptions.CannotSaveModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
@@ -46,6 +49,14 @@ public class ModelController implements Initializable{
 				e.printStackTrace();
 			}
 	    }
+	}
+	
+	public void showAlert(AlertType type, String message) {
+		Alert alert = new Alert(type);
+		alert.setTitle("Alert!");
+		alert.setWidth(400);
+		alert.setHeaderText(message);
+		alert.showAndWait().filter(response -> response == ButtonType.OK);
 	}
 	
 	

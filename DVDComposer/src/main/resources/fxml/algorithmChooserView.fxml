@@ -6,18 +6,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <VBox fx:controller="hu.smiths.dvdcomposer.view.AlgorithmChooserController"
-      xmlns:fx="http://javafx.com/fxml" spacing="10">
+      xmlns:fx="http://javafx.com/fxml" spacing="10"  >
 
     <children>
     <HBox alignment="center">
         <Label text="DVD Composer application"  styleClass="header"/>
     </HBox>  
+    
+    <HBox alignment="center">
+        <Label text="Use the inner algorithm: "/>
+        <CheckBox fx:id="innerAlgorithm" />
+    </HBox>
+    <HBox alignment="center">
+		<Label styleClass="warning" 
+		text="Be careful with exported algorithms, only use JARs from trusted sources."/>
+	</HBox>
     <VBox alignment="center" spacing="20">
 		<Label  fx:id="choosenAlgorithmLabel" maxWidth="600"/>
-		<TextField  fx:id="classNameField" maxWidth="600" promptText="Name of the class of the algorithm"/>
+		<TextField  fx:id="classNameField" maxWidth="600" promptText="Classname of the outer algorithm (full path)"/>
 		
         <VBox alignment="center" spacing="30" >
-       		<Button text="Select new algorithm" onAction="#chooseAlgorithm"/>
+		<Label text=""  maxWidth="400"/>
+       		<Button text="Select new outer algorithm (JAR)" onAction="#chooseAlgorithm"/>
         </VBox>
 	    <HBox  spacing="60"  alignment="center" >
 		       		<Button text="Prev" minHeight="40" minWidth="100" onAction="#prev"/>
