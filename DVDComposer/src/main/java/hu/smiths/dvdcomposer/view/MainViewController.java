@@ -78,11 +78,13 @@ public class MainViewController extends ModelController {
 		containerQuantityCol
 				.setCellFactory(TextFieldTableCell.<DiscGroup, Number>forTableColumn(new NumberStringConverter()));
 		containerQuantityCol.setOnEditCommit((CellEditEvent<DiscGroup, Number> t) -> {
+			if (t.getNewValue() == null || (Long) t.getNewValue() <1l) {
+				showAlert(AlertType.ERROR, "The container count has to be at least 1!");
+				t.getTableView().refresh();
+				return;
+			}
 			((DiscGroup) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setCount(t.getNewValue().intValue());
-			if (t.getNewValue().equals(-1)) {
-				t.getTableColumn().setText("Infinite");
-			}
 			t.getTableView().refresh();
 		});
 		
@@ -165,6 +167,10 @@ public class MainViewController extends ModelController {
 	}
 
 	public void next(ActionEvent event) {
+		if ( data.isEmpty()) {
+			showAlert(AlertType.ERROR, "You have to give at least one container!");
+			return;
+		}
 		refreshModel();
 		SceneManager.getInstance().changeScene("/fxml/fileChooserView.fxml");
 	}
