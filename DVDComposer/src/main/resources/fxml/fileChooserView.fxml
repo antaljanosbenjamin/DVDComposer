@@ -14,9 +14,9 @@
 		<TableView fx:id="tableFolderView" maxWidth="600" maxHeight="300">
 			<columns>
 			
-				<TableColumn  text="File name" fx:id="folderNameCol" minWidth="150"/>
-				<TableColumn text="File path"  fx:id="folderPathCol" minWidth="300"/>
-				<TableColumn text="File size (byte)"  fx:id="folderSizeCol" minWidth="150"/>
+				<TableColumn  text="Folder name" fx:id="folderNameCol" minWidth="150"/>
+				<TableColumn text="Folder path"  fx:id="folderPathCol" minWidth="300"/>
+				<TableColumn text="Folder size (byte)"  fx:id="folderSizeCol" minWidth="150"/>
 			</columns>
 		</TableView>
 		
