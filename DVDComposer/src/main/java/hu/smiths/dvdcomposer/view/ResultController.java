@@ -13,6 +13,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.DirectoryChooser;
@@ -23,6 +24,8 @@ public class ResultController extends ModelController {
 	
 	@FXML
 	TreeView<File> treeView;
+	@FXML
+	TextField isoPrefix;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -57,7 +60,10 @@ public class ResultController extends ModelController {
 	}
 	
 	public void generateIso(ActionEvent event) {
-		
+		if (isoPrefix.getText().equals("")){
+			showAlert(AlertType.WARNING, "Prefix is needed to generate the ISO(s)!");
+			return;
+		}
 		ISOOptions options = new ISOOptions();
 		DirectoryChooser chooser = new DirectoryChooser();
 		chooser.setTitle("Open output location");
@@ -77,7 +83,7 @@ public class ResultController extends ModelController {
 		
 		if (selectedFolder != null) {
 			options.pathToTargetDirectory = selectedFolder.getPath();
-			options.prefix = "meh";
+			options.prefix = isoPrefix.getText();
 			new Thread(task).start();		
 		}
 	}

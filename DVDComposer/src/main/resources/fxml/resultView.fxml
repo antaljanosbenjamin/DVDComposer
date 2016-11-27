@@ -17,6 +17,7 @@
     
 	    <HBox  spacing="60"  alignment="center" >
 		       		<Button text="Prev" minHeight="40" minWidth="100" onAction="#prev"/>
+		       		<TextField fx:id="isoPrefix" promptText="Prefix of the ISO(s)" minWidth="155"/>
 		       		<Button text="ISO file generation" minHeight="40" minWidth="100" onAction="#generateIso"/>
 		</HBox>
     
