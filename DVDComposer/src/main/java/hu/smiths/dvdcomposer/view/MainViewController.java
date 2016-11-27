@@ -10,7 +10,6 @@ import hu.smiths.dvdcomposer.model.DiscGroup;
 import hu.smiths.dvdcomposer.model.ModelManager;
 import hu.smiths.dvdcomposer.view.extensions.NumberTextField;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,18 +20,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
@@ -160,10 +155,7 @@ public class MainViewController extends ModelController {
 			newDiscSizeField.clear();
 			newDiscQuantityField.clear();
 		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Alert!");
-			alert.setHeaderText("Missing prameter(s)! Please fill in every cell, or leave them empty");
-			alert.showAndWait().filter(response -> response == ButtonType.OK);
+			showAlert(AlertType.WARNING, "Missing prameter(s)! Please fill in every cell, or leave them empty");
 		}
 	}
 

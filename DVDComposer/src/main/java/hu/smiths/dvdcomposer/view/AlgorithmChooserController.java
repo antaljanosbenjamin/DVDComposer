@@ -10,9 +10,7 @@ import hu.smiths.dvdcomposer.model.algorithm.OuterAlgorithm;
 import hu.smiths.dvdcomposer.model.exceptions.CannotLoadAlgorithmClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -62,11 +60,8 @@ public class AlgorithmChooserController extends ModelController {
 			}
 			SceneManager.getInstance().changeScene("/fxml/resultView.fxml");
 		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Alert!");
-			alert.setHeaderText("Missing prameter(s)! Please load the Jar, and give the class name, "
+			showAlert(AlertType.WARNING, "Missing prameter(s)! Please load the Jar, and give the class name, "
 					+ "or use the inner algorithm before generating the result!");
-			alert.showAndWait().filter(response -> response == ButtonType.OK);
 		}
 	}
 

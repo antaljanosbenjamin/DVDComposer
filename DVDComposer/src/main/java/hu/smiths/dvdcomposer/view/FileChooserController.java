@@ -52,7 +52,7 @@ public class FileChooserController extends ModelController {
 
 	public void openFileChooser(ActionEvent event) {
 		DirectoryChooser chooser = new DirectoryChooser();
-		chooser.setTitle("Open File");
+		chooser.setTitle("Open folder");
 		File selectedFolder = chooser.showDialog(SceneManager.getInstance().getPrimaryStage());
 		if (selectedFolder != null) {
 			data.addAll(Arrays.asList(selectedFolder.listFiles()).stream().filter(f -> f.isDirectory())
@@ -69,10 +69,7 @@ public class FileChooserController extends ModelController {
 			refreshModel();
 			SceneManager.getInstance().changeScene("/fxml/algorithmChooserView.fxml");
 		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Alert!");
-			alert.setHeaderText("Please select at least one folder to continue.");
-			alert.showAndWait().filter(response -> response == ButtonType.OK);
+			showAlert(AlertType.WARNING, "Please select at least one folder to continue.");
 		}
 	}
 

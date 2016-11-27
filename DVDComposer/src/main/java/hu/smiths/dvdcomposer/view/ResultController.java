@@ -6,12 +6,16 @@ import java.util.ResourceBundle;
 
 import hu.smiths.dvdcomposer.model.ModelManager;
 import hu.smiths.dvdcomposer.model.Result;
-import hu.smiths.dvdcomposer.model.algorithm.GreedyAlgorithm;
+import hu.smiths.dvdcomposer.model.exceptions.CannotCreateISOFile;
 import hu.smiths.dvdcomposer.model.exceptions.InvalidResultException;
+import hu.smiths.dvdcomposer.utils.ISOOptions;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.stage.DirectoryChooser;
 
 public class ResultController extends ModelController {
 
@@ -26,6 +30,7 @@ public class ResultController extends ModelController {
 			result = ModelManager.getModel().generateResult();
 		} catch (InvalidResultException e) {
 			e.printStackTrace();
+			showAlert(AlertType.ERROR, "Not enough space on the drives, please adjust the parameters!");
 		}
 		fillTree();
 	}
@@ -52,6 +57,29 @@ public class ResultController extends ModelController {
 	}
 	
 	public void generateIso(ActionEvent event) {
+		
+		ISOOptions options = new ISOOptions();
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setTitle("Open output location");
+		File selectedFolder = chooser.showDialog(SceneManager.getInstance().getPrimaryStage());
+		
+		Task<Void> task = new Task<Void>() {
+		    @Override
+		    protected Void call() throws Exception {
+		    	try {
+					result.generateISOFiles(options);
+				} catch (CannotCreateISOFile e) {
+					e.printStackTrace();
+				}
+				return null;
+		    }
+		};
+		
+		if (selectedFolder != null) {
+			options.pathToTargetDirectory = selectedFolder.getPath();
+			options.prefix = "meh";
+			new Thread(task).start();		
+		}
 	}
 	
 }
