@@ -39,8 +39,6 @@ public class MainViewController extends ModelController {
 	private final Long DVD_SIZE = 5046586573l;
 	private final Long BR_SIZE = 26843545600l;
 	@FXML
-	GridPane gridPane;
-	@FXML
 	Button newDiscGroupButton;
 	@FXML
 	TextField newDiscNameField;
@@ -62,8 +60,6 @@ public class MainViewController extends ModelController {
 	TableColumn<DiscGroup, DiscGroup> containerDeleteCol;
 
 	private final ObservableList<DiscGroup> data = FXCollections.observableArrayList();
-
-	int bonusContainerNumber = 0;
 
 	@SuppressWarnings("unchecked")
 	@Override
