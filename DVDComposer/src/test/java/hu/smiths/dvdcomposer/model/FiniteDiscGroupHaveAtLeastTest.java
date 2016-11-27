@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FiniteDiscGroupHaveAtLeastTests {
+public class FiniteDiscGroupHaveAtLeastTest {
 
 	private String groupName;
 
@@ -33,7 +33,7 @@ public class FiniteDiscGroupHaveAtLeastTests {
 						Arrays.asList(new Boolean[] { true, true, true, true, false, false }) } });
 	}
 
-	public FiniteDiscGroupHaveAtLeastTests(String groupName, Long groupSizeInBytes, Integer count,
+	public FiniteDiscGroupHaveAtLeastTest(String groupName, Long groupSizeInBytes, Integer count,
 			List<Integer> testValuesForCount, List<Boolean> expectedReturnValues) {
 		this.groupName = groupName;
 		this.groupSizeInBytes = groupSizeInBytes;

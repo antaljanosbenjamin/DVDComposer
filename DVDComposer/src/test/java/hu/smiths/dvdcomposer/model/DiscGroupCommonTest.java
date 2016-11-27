@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DiscGroupCommonTests {
+public class DiscGroupCommonTest {
 
 	private DiscGroup blueRayGroup;
 

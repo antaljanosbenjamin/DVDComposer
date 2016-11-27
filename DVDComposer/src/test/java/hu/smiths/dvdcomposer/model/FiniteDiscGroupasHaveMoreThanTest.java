@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FiniteDiscGroupasHaveMoreThanTests {
+public class FiniteDiscGroupasHaveMoreThanTest {
 
 	private String groupName;
 
@@ -33,7 +33,7 @@ public class FiniteDiscGroupasHaveMoreThanTests {
 						Arrays.asList(new Boolean[] { true, true, true, false, false, false }) } });
 	}
 
-	public FiniteDiscGroupasHaveMoreThanTests(String groupName, Long groupSizeInBytes, Integer count,
+	public FiniteDiscGroupasHaveMoreThanTest(String groupName, Long groupSizeInBytes, Integer count,
 			List<Integer> testValuesForCount, List<Boolean> expectedReturnValues) {
 		this.groupName = groupName;
 		this.groupSizeInBytes = groupSizeInBytes;
