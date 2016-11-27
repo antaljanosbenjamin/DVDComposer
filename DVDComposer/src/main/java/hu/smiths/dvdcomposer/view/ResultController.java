@@ -9,10 +9,13 @@ import hu.smiths.dvdcomposer.model.Result;
 import hu.smiths.dvdcomposer.model.exceptions.CannotCreateISOFile;
 import hu.smiths.dvdcomposer.model.exceptions.InvalidResultException;
 import hu.smiths.dvdcomposer.utils.ISOOptions;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -74,6 +77,7 @@ public class ResultController extends ModelController {
 		    protected Void call() throws Exception {
 		    	try {
 					result.generateISOFiles(options);
+					Platform.runLater(() ->showAlert(AlertType.INFORMATION, "ISO generation complete!"));
 				} catch (CannotCreateISOFile e) {
 					e.printStackTrace();
 				}
@@ -84,7 +88,8 @@ public class ResultController extends ModelController {
 		if (selectedFolder != null) {
 			options.pathToTargetDirectory = selectedFolder.getPath();
 			options.prefix = isoPrefix.getText();
-			new Thread(task).start();		
+			new Thread(task).start();
+			System.out.println("asfasf");
 		}
 	}
 	
