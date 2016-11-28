@@ -32,10 +32,6 @@ public final class Disc implements Serializable {
 		return group;
 	}
 
-	public void setGroup(DiscGroup group) {
-		this.group = group;
-	}
-
 	public void addFolder(File folder) {
 		Integer newFolderSize = getFolderSize(folder);
 		if (freeSpaceInBytes < newFolderSize)
@@ -43,11 +39,6 @@ public final class Disc implements Serializable {
 		freeSpaceInBytes -= newFolderSize;
 		containedFolders.add(folder);
 
-	}
-
-	public void removeFolder(File folder) {
-		freeSpaceInBytes += getFolderSize(folder);
-		containedFolders.remove(folder);
 	}
 
 	public Boolean spaceIsEnough() {
@@ -85,7 +76,6 @@ public final class Disc implements Serializable {
 	public void createISOFileWithWriter(File output, ISOWriter writer) throws CannotCreateISOFile {
 		try {
 			addAllFolderToISOWriter(writer);
-			System.out.println("ADDED");
 			writer.dumpContentToFile(output);
 		} catch (CannotAddFolderToISOImageException e) {
 			throw new CannotCreateISOFile(e);
