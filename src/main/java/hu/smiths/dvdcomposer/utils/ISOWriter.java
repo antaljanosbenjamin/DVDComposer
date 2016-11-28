@@ -17,7 +17,7 @@ public class ISOWriter {
 
 	private CreateISO iso;
 
-	private File outputFolder;
+	private File output;
 
 	private ISO9660Config iso9660Config;
 
@@ -27,7 +27,7 @@ public class ISOWriter {
 
 	public void dumpContentToFile(File output) throws CannotCreateISOFile {
 		try {
-			this.outputFolder = output;
+			this.output = output;
 			initializeAllConfig();
 			writeData();
 			setNewEmptyRootDirectory();
@@ -79,7 +79,7 @@ public class ISOWriter {
 	}
 
 	private void initializeCreateISO() throws FileNotFoundException {
-		ISOImageFileHandler streamHandler = new ISOImageFileHandler(outputFolder);
+		ISOImageFileHandler streamHandler = new ISOImageFileHandler(output);
 		iso = new CreateISO(streamHandler, root);
 	}
 }
