@@ -30,17 +30,17 @@ public class ISOWriter {
 			this.output = output;
 			initializeAllConfig();
 			writeData();
-			setNewEmptyRootDirectory();
+			setNewDiscConfig();
 		} catch (FileNotFoundException | ConfigException | HandlerException e) {
 			throw new CannotCreateISOFile(e);
 		}
 	}
 
 	public ISOWriter() {
-		setNewEmptyRootDirectory();
+		setNewDiscConfig();
 	}
 
-	public void setNewEmptyRootDirectory() {
+	public void setNewDiscConfig() {
 		ISO9660RootDirectory.MOVED_DIRECTORIES_STORE_NAME = "rr_moved";
 		root = new ISO9660RootDirectory();
 	}
