@@ -33,7 +33,7 @@ public final class Disc implements Serializable {
 	}
 
 	public void addFolder(File folder) {
-		Integer newFolderSize = getFolderSize(folder);
+		Long newFolderSize = getFolderSize(folder);
 		if (freeSpaceInBytes < newFolderSize)
 			throw new TooLargeFolderException("Folder " + folder.getAbsolutePath() + " is too large for this disc!");
 		freeSpaceInBytes -= newFolderSize;
