@@ -29,10 +29,10 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import javafx.util.converter.NumberStringConverter;
 
+@SuppressWarnings("restriction")
 public class MainViewController extends ModelController {
 
 	private final Long CD_SIZE = 734003200l;
@@ -54,6 +54,7 @@ public class MainViewController extends ModelController {
 	TableColumn<DiscGroup, Number> containerSizeCol;
 	@FXML
 	TableColumn<DiscGroup, Number> containerQuantityCol;
+	@SuppressWarnings("rawtypes")
 	@FXML
 	TableColumn containerInfinityCol;
 	@FXML

@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
+@SuppressWarnings("restriction")
 public class AlgorithmChooserController extends ModelController {
 
 	@FXML

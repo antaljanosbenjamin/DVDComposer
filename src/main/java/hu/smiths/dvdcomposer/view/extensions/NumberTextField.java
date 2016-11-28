@@ -2,6 +2,7 @@ package hu.smiths.dvdcomposer.view.extensions;
 
 import javafx.scene.control.TextField;
 
+@SuppressWarnings("restriction")
 public class NumberTextField extends TextField {
 
 

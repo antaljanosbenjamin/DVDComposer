@@ -4,6 +4,7 @@ import hu.smiths.dvdcomposer.view.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+@SuppressWarnings("restriction")
 public class MainApplication extends Application {
 
 	@Override

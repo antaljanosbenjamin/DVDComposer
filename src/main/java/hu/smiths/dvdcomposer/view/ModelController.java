@@ -15,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+@SuppressWarnings("restriction")
 public class ModelController implements Initializable{
 
 	@Override

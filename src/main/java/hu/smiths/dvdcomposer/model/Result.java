@@ -92,6 +92,6 @@ public class Result {
 
 	private File createOutputFileFromDiscNumberAndGroup(int discNumber, DiscGroup group) {
 		return new File(
-				isoOptions.pathToTargetDirectory + "/" + isoOptions.prefix + "_" + group.getName() + "_" + discNumber);
+				isoOptions.pathToTargetDirectory + "/" + isoOptions.prefix + "_" + group.getName() + "_" + discNumber +" .iso");
 	}
 }

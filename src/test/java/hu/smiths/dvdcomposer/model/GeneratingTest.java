@@ -1,14 +1,11 @@
 package hu.smiths.dvdcomposer.model;
 
-import static hu.smiths.dvdcomposer.model.FolderUtils.getFolderSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
@@ -166,15 +163,4 @@ public class GeneratingTest {
 		Result result = model.generateResult();
 		assertTrue(result.getDiscs().size() == 3);
 	}
-	
-	private String getDiscsAsString(Collection<Disc> discs){
-		StringBuilder discsAsString = new StringBuilder();
-		for(Disc disc : discs){
-			discsAsString.append(disc.getGroup().getName() + "\n");
-			for(File folder : disc.getFolders())
-				discsAsString.append("\t" + folder.getName() + " " + getFolderSize(folder) + "\n" );
-		}
-		return discsAsString.toString();
-	}
-
 }
