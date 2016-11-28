@@ -57,7 +57,11 @@ public class OuterAlgorithm implements Algorithm {
 
 	@Override
 	public Set<Disc> generate(Input input) throws CannotFindValidAssignmentException {
-		return algorithm.generate(input);
+		try {
+			return algorithm.generate(input);
+		} catch (Throwable t) {
+			throw new CannotFindValidAssignmentException("The outer algorithm could not find a valid assigment!", t);
+		}
 	}
 	
 	public void changeAlgorithm(File jar, String classFQN) throws CannotLoadAlgorithmClass{
