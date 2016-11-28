@@ -59,4 +59,8 @@ public class OuterAlgorithm implements Algorithm {
 	public Set<Disc> generate(Input input) throws CannotFindValidAssignmentException {
 		return algorithm.generate(input);
 	}
+	
+	public void changeAlgorithm(File jar, String classFQN) throws CannotLoadAlgorithmClass{
+		algorithm = load(jar, classFQN);
+	}
 }
